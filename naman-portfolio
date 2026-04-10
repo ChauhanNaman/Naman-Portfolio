@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+
+<html class="scroll-smooth" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>The Digital Architect | Alex Reed Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;600;700;800&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            "colors": {
+                    "primary": "#00327d",
+                    "surface-container-lowest": "#ffffff",
+                    "outline-variant": "#c3c6d5",
+                    "inverse-surface": "#2e3132",
+                    "on-secondary-container": "#006e6e",
+                    "surface-tint": "#2559bd",
+                    "on-tertiary-fixed-variant": "#00513a",
+                    "on-secondary": "#ffffff",
+                    "inverse-on-surface": "#f0f1f2",
+                    "error": "#ba1a1a",
+                    "error-container": "#ffdad6",
+                    "tertiary-fixed": "#67fcc6",
+                    "on-surface": "#191c1d",
+                    "tertiary": "#003f2d",
+                    "on-error-container": "#93000a",
+                    "surface-bright": "#f8f9fa",
+                    "on-tertiary": "#ffffff",
+                    "inverse-primary": "#b1c5ff",
+                    "on-secondary-fixed-variant": "#004f4f",
+                    "primary-fixed": "#dae2ff",
+                    "secondary-fixed": "#93f2f2",
+                    "on-primary-fixed": "#001946",
+                    "on-primary-fixed-variant": "#00419e",
+                    "on-primary": "#ffffff",
+                    "surface-container-low": "#f3f4f5",
+                    "surface-container": "#edeeef",
+                    "tertiary-container": "#005940",
+                    "on-primary-container": "#a5bdff",
+                    "surface-variant": "#e1e3e4",
+                    "on-secondary-fixed": "#002020",
+                    "secondary": "#006a6a",
+                    "surface-dim": "#d9dadb",
+                    "surface-container-highest": "#e1e3e4",
+                    "surface-container-high": "#e7e8e9",
+                    "secondary-container": "#90efef",
+                    "primary-fixed-dim": "#b1c5ff",
+                    "surface": "#f8f9fa",
+                    "background": "#f8f9fa",
+                    "on-tertiary-fixed": "#002116",
+                    "on-background": "#191c1d",
+                    "on-tertiary-container": "#39d7a4",
+                    "tertiary-fixed-dim": "#44dfab",
+                    "primary-container": "#0047ab",
+                    "on-surface-variant": "#434653",
+                    "outline": "#737784",
+                    "on-error": "#ffffff",
+                    "secondary-fixed-dim": "#76d6d5"
+            },
+            "borderRadius": {
+                    "DEFAULT": "0.25rem",
+                    "lg": "0.5rem",
+                    "xl": "0.75rem",
+                    "full": "9999px"
+            },
+            "fontFamily": {
+                    "headline": ["Manrope"],
+                    "body": ["Inter"],
+                    "label": ["Inter"]
+            }
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        body { font-family: 'Inter', sans-serif; }
+        h1, h2, h3 { font-family: 'Manrope', sans-serif; }
+        .glass-nav { backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+
+        /* Modal Styles */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(25, 28, 29, 0.8);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .modal-container {
+            width: 90%;
+            max-width: 1000px;
+            max-height: 90vh;
+            background-color: #ffffff;
+            border-radius: 1.5rem;
+            overflow-y: auto;
+            transform: scale(0.9) translateY(20px);
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+        }
+        .modal-overlay.active .modal-container {
+            transform: scale(1) translateY(0);
+        }
+        body.modal-open {
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body class="bg-surface text-on-surface selection:bg-secondary-container selection:text-on-secondary-container">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-surface/80 dark:bg-slate-900/80 backdrop-blur-xl shadow-sm dark:shadow-none">
+<div class="flex justify-between items-center max-w-7xl mx-auto px-8 py-4">
+<a class="text-xl font-black text-blue-900 dark:text-blue-100 uppercase tracking-tighter" href="#">Naman Chauhan</a>
+<div class="hidden md:flex items-center space-gap-8 gap-8">
+<a class="text-blue-700 dark:text-teal-400 border-b-2 border-teal-500 pb-1 font-manrope tracking-tight font-bold" href="#work">Work</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 dark:hover:text-blue-100 transition-colors font-manrope tracking-tight font-bold" href="#services">Services</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 dark:hover:text-blue-100 transition-colors font-manrope tracking-tight font-bold" href="#stack">Stack</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 dark:hover:text-blue-100 transition-colors font-manrope tracking-tight font-bold" href="#about">About</a>
+<a class="text-slate-600 dark:text-slate-400 hover:text-blue-900 dark:hover:text-blue-100 transition-colors font-manrope tracking-tight font-bold" href="#contact">Contact</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 hover:bg-blue-50/50 dark:hover:bg-slate-800/50 rounded-full transition-all">
+<span class="material-symbols-outlined text-blue-900 dark:text-blue-400" data-icon="dark_mode">dark_mode</span>
+</button>
+</div>
+</div>
+</nav>
+<main>
+<!-- Hero Section -->
+<section class="relative min-h-[1024px] flex items-center pt-20 overflow-hidden bg-surface" data-stitch-vh="min-h-[1024px]===min-h-screen">
+<div class="max-w-7xl mx-auto px-8 w-full grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
+<div class="lg:col-span-7 space-y-8">
+<div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-secondary-container text-on-secondary-container font-medium text-sm tracking-wide">
+<span class="w-2 h-2 rounded-full bg-secondary animate-pulse"></span>
+                    AVAILABLE FOR NEW PROJECTS
+                </div>
+<h1 class="text-5xl lg:text-7xl font-extrabold text-on-surface tracking-tighter leading-[1.1]">
+                    Naman Chauhan.<br/>
+<span class="text-primary italic">WordPress Developer</span><br/>
+                    Building Digital Structures.
+                </h1>
+<p class="text-xl text-on-surface-variant max-w-xl leading-relaxed">
+                    Crafting high-performance WordPress ecosystems with architectural precision. Specializing in WooCommerce scalability and bespoke engineering.
+                </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<a class="px-8 py-4 bg-gradient-to-br from-primary to-primary-container text-on-primary rounded-xl font-bold tracking-tight hover:opacity-90 transition-all flex items-center gap-2" href="#contact">
+                        Hire Me
+                        <span class="material-symbols-outlined" data-icon="arrow_forward">arrow_forward</span>
+</a>
+<a class="px-8 py-4 text-primary font-bold tracking-tight hover:bg-surface-container-low rounded-xl transition-all" href="#work">
+                        View Portfolio
+                    </a>
+</div>
+</div>
+<div class="lg:col-span-5 relative">
+<div class="aspect-square rounded-3xl overflow-hidden bg-surface-container-high relative group">
+<img alt="Digital Workspace" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD8hV8vVG7m-uaywik2HeFWzcRkkPr-_QIEWZicJzYlnTZrnqhvxChVCuI6r5pC2ddJ3lHsKJTFCUePFIWqXJXxKUgQSwxZePLHUXZZaT7e0F1psNVtKWfbRY-8M9aY74gaMRxOPKqPn5fjNLI4wCWeUp8gIIJD9kOnQlMtI2pLn9n1eR79lLgXC7tdFSMRE-VBQyS2oJaZvP2IEJzng-rCcOEYaevDqLcAArggG2iJm1645ayURXNVnLNw-VKNQsyiLYDtdIRS_ao"/>
+<div class="absolute inset-0 bg-gradient-to-t from-primary/20 to-transparent"></div>
+</div>
+<!-- Stats Floating Card -->
+<div class="absolute -bottom-6 -left-6 bg-surface-container-lowest p-6 rounded-2xl shadow-xl max-w-[200px] border border-outline-variant/10">
+<p class="text-3xl font-black text-secondary">30+</p>
+<p class="text-sm font-semibold text-on-surface-variant uppercase tracking-widest">Projects Delivered</p>
+</div>
+</div>
+</div>
+</section>
+<!-- About Section -->
+<section class="py-32 bg-surface-container-low" id="about">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-20">
+<div>
+<p class="text-secondary font-bold tracking-widest uppercase text-sm mb-4">The Architect's Story</p>
+<h2 class="text-4xl font-extrabold tracking-tighter mb-8">4 Years of Crafting Robust Digital Environments</h2>
+<div class="space-y-6 text-on-surface-variant leading-relaxed">
+<p>I don't just "install themes." I engineer WordPress solutions that scale. With half a decade of experience, my focus has shifted from simple sites to complex enterprise ecosystems.</p>
+<p>My methodology treats every project as a piece of digital architecture—ensuring the foundation is secure, the structural code is lean, and the user interface is inviting.</p>
+</div>
+</div>
+<div class="grid grid-cols-2 gap-4">
+<div class="p-8 bg-surface-container-lowest rounded-2xl space-y-4">
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="shopping_cart">shopping_cart</span>
+<h3 class="font-bold text-lg">WooCommerce</h3>
+<p class="text-sm text-on-surface-variant">Architecting complex online stores with custom logic.</p>
+</div>
+<div class="p-8 bg-surface-container-lowest rounded-2xl space-y-4">
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="payments">payments</span>
+<h3 class="font-bold text-lg">Custom Checkout</h3>
+<p class="text-sm text-on-surface-variant">Streamlining the path to purchase for maximum conversion.</p>
+</div>
+<div class="p-8 bg-surface-container-lowest rounded-2xl space-y-4">
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="search_check">search_check</span>
+<h3 class="font-bold text-lg">Technical SEO</h3>
+<p class="text-sm text-on-surface-variant">Building search-engine-ready structures from the ground up.</p>
+</div>
+<div class="p-8 bg-surface-container-lowest rounded-2xl space-y-4">
+<span class="material-symbols-outlined text-secondary text-4xl" data-icon="speed">speed</span>
+<h3 class="font-bold text-lg">Performance</h3>
+<p class="text-sm text-on-surface-variant">Optimizing Core Web Vitals for lightning-fast delivery.</p>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Skills Section -->
+<section class="py-32 bg-surface" id="stack">
+<div class="max-w-7xl mx-auto px-8">
+<div class="flex flex-col md:flex-row justify-between items-end mb-16 gap-8">
+<div class="max-w-xl">
+<p class="text-secondary font-bold tracking-widest uppercase text-sm mb-4">Technical Proficiency</p>
+<h2 class="text-4xl font-extrabold tracking-tighter">The Modern Stack Behind the WordPress Core</h2>
+</div>
+<div class="hidden md:block">
+<span class="text-outline text-6xl font-black opacity-10">TECH_STACK</span>
+</div>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 gap-x-16 gap-y-12">
+<div class="space-y-2">
+<div class="flex justify-between font-bold text-on-surface">
+<span>WordPress &amp; PHP</span>
+<span>95%</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 95%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between font-bold text-on-surface">
+<span>WooCommerce</span>
+<span>90%</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 90%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between font-bold text-on-surface">
+<span>JavaScript (ES6+)</span>
+<span>85%</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 85%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between font-bold text-on-surface">
+<span>REST API &amp; Integration</span>
+<span>80%</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 80%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between font-bold text-on-surface">
+<span>Git &amp; Deployment</span>
+<span>88%</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 88%"></div>
+</div>
+</div>
+<div class="space-y-2">
+<div class="flex justify-between font-bold text-on-surface">
+<span>Tailwind &amp; SCSS</span>
+<span>92%</span>
+</div>
+<div class="h-3 w-full bg-surface-container-high rounded-full overflow-hidden">
+<div class="h-full bg-primary rounded-full" style="width: 92%"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects Grid -->
+<section class="py-32 bg-surface-container-low" id="work">
+<div class="max-w-7xl mx-auto px-8">
+<div class="text-center mb-20">
+<p class="text-secondary font-bold tracking-widest uppercase text-sm mb-4">Portfolio Highlights</p>
+<h2 class="text-4xl font-extrabold tracking-tighter">Case Studies in Digital Architecture</h2>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+<!-- Project 1 -->
+<div class="project-card group cursor-pointer relative bg-surface-container-lowest rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2" data-project-id="1">
+<div class="aspect-[4/3] overflow-hidden">
+<img alt="Vanguard Storefront" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDRZ8C4W5ud9KcCrV_9dAJV5D4bYdnLUspq6rY2chxM4QML2UMZhm-jS_o5vZV1JgEpeqa7JXyn54nGlH-pZzLjzGSMXmEUoVkMZtFkwFWFRitZmYqptUkCVdG8uaA_qceMj3IZqap59WwxEspi_QpgEJXZuR3NGuJRHXc-n_NITlSPpR_gyS4bRAupyq-10tTYxuvo7XiLLtnDCTY0mEzifmLUEsMoMAV6hgRfAKzQ8qTpplkOPcNOsfQRI5ASqo2VZmOjNvgDC1Q"/>
+</div>
+<div class="p-8">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold uppercase tracking-widest rounded-full">WooCommerce</span>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Custom API</span>
+</div>
+<h3 class="text-xl font-extrabold mb-2 group-hover:text-primary transition-colors">Vanguard Storefront</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed line-clamp-2">A headless commerce solution utilizing WP as a back-end engine for a high-end furniture brand.</p>
+<div class="mt-6 pt-6 border-t border-outline-variant/10">
+<span class="text-primary font-bold text-sm inline-flex items-center gap-2 group/link">
+                                Exploration Details
+                                <span class="material-symbols-outlined text-sm transition-transform group-hover/link:translate-x-1" data-icon="open_in_new">open_in_new</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Project 2 -->
+<div class="project-card group cursor-pointer relative bg-surface-container-lowest rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2" data-project-id="2">
+<div class="aspect-[4/3] overflow-hidden">
+<img alt="Nexus Analytics" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCmDP646Z0sQNz32Vl8tu17wBsAHRn8Oogl9KCzDsG8znUmRQGB3AbhKjU_WihQHtXWsSuTuWO-cYj6w0vPfu3fzkw7I7LGmwta8SrYdJfsEZANK89gvnNkKegPF0NtDTVL4nTbFOmYmdCzKB0tldOP85qNHBhXrzywlE5NHq9-1qcPtGvwoF52rfrNIsbHzY_WiixEpk-_8Ra0ONTn1jAIXkgcBFjBLq1BbGxO5E3HKMdFthgRBucILYmZK1Zpabp9RIN-MZUOL5g"/>
+</div>
+<div class="p-8">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold uppercase tracking-widest rounded-full">SaaS</span>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Optimization</span>
+</div>
+<h3 class="text-xl font-extrabold mb-2 group-hover:text-primary transition-colors">Nexus Analytics</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed line-clamp-2">Integrated custom data visualization modules into a multi-tenant WordPress network.</p>
+<div class="mt-6 pt-6 border-t border-outline-variant/10">
+<span class="text-primary font-bold text-sm inline-flex items-center gap-2 group/link">
+                                Exploration Details
+                                <span class="material-symbols-outlined text-sm transition-transform group-hover/link:translate-x-1" data-icon="open_in_new">open_in_new</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Project 3 -->
+<div class="project-card group cursor-pointer relative bg-surface-container-lowest rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2" data-project-id="3">
+<div class="aspect-[4/3] overflow-hidden">
+<img alt="Moderna Real Estate" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCjFF5oks5PfvHiLsBUkcPdtCdQz6cd7M-KKaobXkJbQLtnSWSFFTWXNeyBxO9TJIgKQOH-XJ4sxocfz_mPQZe8UWrFt6E41Tf6zzzrIzOHe9mxZqxV1zYDYDSUOPxZ_nfRawgzjHLneadUncrLVAbbRNsElw2Ny1lIJY48VVgCntaLVhfNLR_ho6sqRDWaTO826mU41tX47J3DO0rA4XOUxEboaMG8U1COvVxCB1Z6YOBQrd3PJWv678Li-3XJfaiQW5nghZpg2pg"/>
+</div>
+<div class="p-8">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Performance</span>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold uppercase tracking-widest rounded-full">FSE</span>
+</div>
+<h3 class="text-xl font-extrabold mb-2 group-hover:text-primary transition-colors">Moderna Real Estate</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed line-clamp-2">A zero-dependency custom theme scoring 100 on all Core Web Vital metrics.</p>
+<div class="mt-6 pt-6 border-t border-outline-variant/10">
+<span class="text-primary font-bold text-sm inline-flex items-center gap-2 group/link">
+                                Exploration Details
+                                <span class="material-symbols-outlined text-sm transition-transform group-hover/link:translate-x-1" data-icon="open_in_new">open_in_new</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Project 4 -->
+<div class="project-card group cursor-pointer relative bg-surface-container-lowest rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2" data-project-id="4">
+<div class="aspect-[4/3] overflow-hidden">
+<img alt="Zenith Booking" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBEl_3EYOfXrc6wDaSMhwG4G_UJQytGToiVa60OiVhNM9t7IzEwFgbCGBN2A5Z0NwXKS_5O-fi3o8zKQUAIKZ3v0y41cZ_e7xt4p5XyfCUcJMxuPcfzDmRx_bdRGZMqLK2JiclT0bg1NMrT6yhtel0bzMuVzlSrcZ4vq5ahfnXDJy85GVP34AtwYj_v3SG_tUjJG5gaOXlBOCYPfhb-YmfAxaYWJtsu8_y1oZZLMBDKoj5S4cdb9AXaCPFsU1vQKmsIi0L4_1a53uc"/>
+</div>
+<div class="p-8">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Custom API</span>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold uppercase tracking-widest rounded-full">PHP</span>
+</div>
+<h3 class="text-xl font-extrabold mb-2 group-hover:text-primary transition-colors">Zenith Booking System</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed line-clamp-2">A bespoke scheduling engine built with React and integrated into WordPress via REST API.</p>
+<div class="mt-6 pt-6 border-t border-outline-variant/10">
+<span class="text-primary font-bold text-sm inline-flex items-center gap-2 group/link">
+                                Exploration Details
+                                <span class="material-symbols-outlined text-sm transition-transform group-hover/link:translate-x-1" data-icon="open_in_new">open_in_new</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Project 5 -->
+<div class="project-card group cursor-pointer relative bg-surface-container-lowest rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2" data-project-id="5">
+<div class="aspect-[4/3] overflow-hidden">
+<img alt="Lumina Portfolio" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCktHEIljRWxV3Ow6RBlM4QgG4uqMs0ECcD8AokQfW88I6BPz2yyzJm8E1Ro6LF5-bMBdLDeWLstx7apV8Zi_0eT-Jj9LxuA-CLfn14mcvB-0hXTquJAi7tLIREmlJruQs6WObZLOkXDySq96sMDwphnfQx_RZ6aKvt8BIY_nfIuVXXdZETI47fre6M8PtzyhvLRehOYE-jbQHTeiydTH5j1rZjKwwAECkCOeYWSBaPLKrMKKnMu5JVde6H8fJQQ10x32z9g6vrpS0"/>
+</div>
+<div class="p-8">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Minimalist</span>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold uppercase tracking-widest rounded-full">Design</span>
+</div>
+<h3 class="text-xl font-extrabold mb-2 group-hover:text-primary transition-colors">Lumina Portfolio</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed line-clamp-2">An ultra-clean portfolio site for high-end creatives focusing on typography and motion.</p>
+<div class="mt-6 pt-6 border-t border-outline-variant/10">
+<span class="text-primary font-bold text-sm inline-flex items-center gap-2 group/link">
+                                Exploration Details
+                                <span class="material-symbols-outlined text-sm transition-transform group-hover/link:translate-x-1" data-icon="open_in_new">open_in_new</span>
+</span>
+</div>
+</div>
+</div>
+<!-- Project 6 -->
+<div class="project-card group cursor-pointer relative bg-surface-container-lowest rounded-3xl overflow-hidden transition-all duration-500 hover:-translate-y-2" data-project-id="6">
+<div class="aspect-[4/3] overflow-hidden">
+<img alt="Apex LMS" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700 scale-110 group-hover:scale-100" src="https://lh3.googleusercontent.com/aida-public/AB6AXuAAuKMN3ZmTCtTXiM7VJqs3bw-pUDMWVb-Sza6sDO1E3cnGN9mQ3bU1JjuFsbA3ZdNjqg6BXvaodAHo0uGgswDWt41p-OmP3dYsAZwP6OWhZ9I6FK67xyuIbMEycJZSFtJ6P5gPiE11bqIASH1dfPOwlco85e8qGFWkk3BuvhxswBLiEY_EvhVKmZtQ1r1qpmdezAnHaZHj8FfrQtCPFIsZtX3USZL9g8Ejf0hL5PDhO1OBJGrz-ktV1uWKa9f3fNzthYJDGuu4n00"/>
+</div>
+<div class="p-8">
+<div class="flex flex-wrap gap-2 mb-4">
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold uppercase tracking-widest rounded-full">LMS</span>
+<span class="px-3 py-1 bg-primary-fixed text-on-primary-fixed-variant text-[10px] font-bold uppercase tracking-widest rounded-full">E-learning</span>
+</div>
+<h3 class="text-xl font-extrabold mb-2 group-hover:text-primary transition-colors">Apex E-learning Platform</h3>
+<p class="text-sm text-on-surface-variant leading-relaxed line-clamp-2">Complex LMS integration with custom course paths and progress tracking systems.</p>
+<div class="mt-6 pt-6 border-t border-outline-variant/10">
+<span class="text-primary font-bold text-sm inline-flex items-center gap-2 group/link">
+                                Exploration Details
+                                <span class="material-symbols-outlined text-sm transition-transform group-hover/link:translate-x-1" data-icon="open_in_new">open_in_new</span>
+</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Contact Section -->
+<section class="py-32 bg-surface" id="contact">
+<div class="max-w-7xl mx-auto px-8">
+<div class="grid grid-cols-1 lg:grid-cols-12 gap-16">
+<div class="lg:col-span-5">
+<p class="text-secondary font-bold tracking-widest uppercase text-sm mb-4">Let's Connect</p>
+<h2 class="text-4xl font-extrabold tracking-tighter mb-8">Ready to initiate your next build?</h2>
+<p class="text-on-surface-variant mb-12 max-w-sm">I'm currently accepting new projects and consulting opportunities. Let's discuss how we can build something enduring.</p>
+<div class="space-y-6">
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="mail">mail</span>
+</div>
+<div>
+<p class="text-xs font-bold uppercase text-outline tracking-widest">Email Me</p>
+<p class="font-bold">hello@digitalarchitect.com</p>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<div class="w-12 h-12 bg-primary/5 rounded-xl flex items-center justify-center text-primary">
+<span class="material-symbols-outlined" data-icon="location_on">location_on</span>
+</div>
+<div>
+<p class="text-xs font-bold uppercase text-outline tracking-widest">Office</p>
+<p class="font-bold">San Francisco, CA (Remote Friendly)</p>
+</div>
+</div>
+</div>
+</div>
+<div class="lg:col-span-7 bg-surface-container-low p-10 rounded-3xl">
+<form class="space-y-6">
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+<div class="space-y-2">
+<label class="text-sm font-bold text-on-surface-variant ml-1">Full Name</label>
+<input class="w-full px-6 py-4 bg-surface-container-lowest border-none rounded-xl focus:ring-2 focus:ring-secondary/50 transition-all placeholder:text-outline/50" placeholder="John Doe" type="text"/>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold text-on-surface-variant ml-1">Email Address</label>
+<input class="w-full px-6 py-4 bg-surface-container-lowest border-none rounded-xl focus:ring-2 focus:ring-secondary/50 transition-all placeholder:text-outline/50" placeholder="john@example.com" type="email"/>
+</div>
+</div>
+<div class="space-y-2">
+<label class="text-sm font-bold text-on-surface-variant ml-1">Project Details</label>
+<textarea class="w-full px-6 py-4 bg-surface-container-lowest border-none rounded-xl focus:ring-2 focus:ring-secondary/50 transition-all placeholder:text-outline/50" placeholder="Tell me about your architectural vision..." rows="4"></textarea>
+</div>
+<button class="w-full py-5 bg-primary text-on-primary font-bold rounded-xl hover:bg-primary-container transition-all flex items-center justify-center gap-2" type="submit">
+                            Send Message
+                            <span class="material-symbols-outlined" data-icon="send">send</span>
+</button>
+</form>
+</div>
+</div>
+</div>
+</section>
+</main>
+<!-- Footer -->
+<footer class="w-full border-t border-slate-200 dark:border-slate-800 bg-slate-50 dark:bg-slate-950">
+<div class="max-w-7xl mx-auto px-8 py-12 flex flex-col md:flex-row justify-between items-center gap-6">
+<div class="text-lg font-bold text-blue-900 dark:text-blue-100">Naman Chauhan</div>
+<p class="font-inter text-sm leading-relaxed text-slate-500 dark:text-slate-400">© 2024 Digital Architect. Built with WordPress &amp; Precision.</p>
+<div class="flex gap-6">
+<a class="text-slate-500 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-300 transition-colors font-semibold" href="#">GitHub</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-300 transition-colors font-semibold" href="#">LinkedIn</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-300 transition-colors font-semibold" href="#">Twitter</a>
+<a class="text-slate-500 dark:text-slate-400 hover:text-teal-500 dark:hover:text-teal-300 transition-colors font-semibold" href="#">Email</a>
+</div>
+</div>
+</footer>
+<!-- Project Modal Overlay -->
+<div class="modal-overlay" id="projectModal">
+<div class="modal-container">
+<button class="absolute top-6 right-6 z-10 w-12 h-12 bg-white/90 backdrop-blur rounded-full flex items-center justify-center text-on-surface shadow-lg hover:bg-primary hover:text-on-primary transition-all" id="closeModal">
+<span class="material-symbols-outlined">close</span>
+</button>
+<div id="modalContent">
+<!-- Content will be injected by JavaScript -->
+</div>
+</div>
+</div>
+<!-- Back to Top Button -->
+<button class="fixed bottom-8 right-8 w-14 h-14 bg-surface-container-highest/80 backdrop-blur text-primary rounded-full shadow-lg flex items-center justify-center opacity-0 translate-y-10 transition-all duration-300 z-50" id="backToTop">
+<span class="material-symbols-outlined" data-icon="arrow_upward">arrow_upward</span>
+</button>
+<script>
+    const projectsData = {
+        "1": {
+            title: "Vanguard Storefront",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuDRZ8C4W5ud9KcCrV_9dAJV5D4bYdnLUspq6rY2chxM4QML2UMZhm-jS_o5vZV1JgEpeqa7JXyn54nGlH-pZzLjzGSMXmEUoVkMZtFkwFWFRitZmYqptUkCVdG8uaA_qceMj3IZqap59WwxEspi_QpgEJXZuR3NGuJRHXc-n_NITlSPpR_gyS4bRAupyq-10tTYxuvo7XiLLtnDCTY0mEzifmLUEsMoMAV6hgRfAKzQ8qTpplkOPcNOsfQRI5ASqo2VZmOjNvgDC1Q",
+            tags: ["WooCommerce", "Custom API", "React", "Node.js"],
+            description: `
+                Vanguard Storefront is a pioneering headless e-commerce implementation that separates the aesthetic presentation layer from the robust WordPress/WooCommerce core. This architectural decision was driven by the need for sub-second page loads and a highly fluid, app-like user experience for a luxury furniture brand.
+                <br><br>
+                The project involved building a custom REST API middleware that synchronized inventory across multiple physical warehouses while managing complex product variations. We implemented a sleek, minimalist frontend that mirrors the architectural beauty of the products themselves.
+                <br><br>
+                The resulting ecosystem increased conversion rates by 45% within the first quarter and successfully managed peak traffic during high-profile product launches without a single millisecond of downtime.
+            `
+        },
+        "2": {
+            title: "Nexus Analytics",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCmDP646Z0sQNz32Vl8tu17wBsAHRn8Oogl9KCzDsG8znUmRQGB3AbhKjU_WihQHtXWsSuTuWO-cYj6w0vPfu3fzkw7I7LGmwta8SrYdJfsEZANK89gvnNkKegPF0NtDTVL4nTbFOmYmdCzKB0tldOP85qNHBhXrzywlE5NHq9-1qcPtGvwoF52rfrNIsbHzY_WiixEpk-_8Ra0ONTn1jAIXkgcBFjBLq1BbGxO5E3HKMdFthgRBucILYmZK1Zpabp9RIN-MZUOL5g",
+            tags: ["SaaS", "Optimization", "Data Viz", "Chart.js"],
+            description: `
+                Nexus Analytics serves as the data nerve center for a multi-tenant SaaS network. The challenge was to aggregate complex user data from hundreds of individual WordPress instances and present it in a cohesive, actionable dashboard.
+                <br><br>
+                We engineered a high-performance data pipeline using custom database tables and optimized WP-Cron tasks to ensure real-time reporting without taxing server resources. The UI focuses on clarity, utilizing modern data visualization techniques to turn abstract numbers into strategic insights.
+                <br><br>
+                This platform now manages data for over 50,000 active monthly users, providing the client with unparalleled insight into user behavior and system performance metrics.
+            `
+        },
+        "3": {
+            title: "Moderna Real Estate",
+            image: "https://lh3.googleusercontent.com/aida-public/AB6AXuCjFF5oks5PfvHiLsBUkcPdtCdQz6cd7M-KKaobXkJbQLtnSWSFFTWXNeyBxO9TJIgKQOH-XJ4sxocfz_mPQZe8UWrFt6E41Tf6zzzrIzOHe9mxZqxV1zYDYDSUOPxZ_nfRawgzjHLneadUncrLVAbbRNsElw2Ny1lIJY48VVgCntaLVhfNLR_ho6sqRDWaTO826mU41tX47J3DO0rA4XOUxEboaMG8U1COvVxCB1Z6YOBQrd3PJWv678Li-3XJfaiQW5nghZpg2pg",
+            tags: ["Performance", "FSE", "Gutenberg", "Tailwind"],
+            description: `
+                Moderna Real Estate represents the pinnacle of modern WordPress theme development. Built from the ground up using the Full Site Editing (FSE) framework, this project proves that WordPress can be both incredibly flexible and exceptionally fast.
+                <br><br>
+                By strictly adhering to a zero-dependency philosophy and leveraging native WordPress block patterns, we achieved a perfect 100 score across all Google Core Web Vitals. The site features a sophisticated property filtering system and interactive floor plans integrated directly into the block editor.
+                <br><br>
+                This architectural approach provides the client's marketing team with total creative control while maintaining the technical integrity and search engine performance required in the competitive real estate market.
+            `
+        },
+        "4": {
+            title: "Zenith Booking System",
+            image: "https://images.unsplash.com/photo-1551288049-bbbda5366991?auto=format&fit=crop&q=80&w=800",
+            tags: ["Custom API", "PHP", "MySQL", "Security"],
+            description: `
+                The Zenith Booking System is a custom-engineered scheduling platform designed for medical clinics. Security and precision were the primary pillars of this build, requiring HIPAA-compliant data handling within a WordPress environment.
+                <br><br>
+                We developed a robust double-booking prevention algorithm and integrated secure payment gateways for appointment deposits. The system features an intuitive administrative dashboard that allows clinic staff to manage multiple practitioner schedules with ease.
+                <br><br>
+                Since deployment, Zenith has processed over 150,000 successful bookings and reduced appointment no-shows by 30% through automated SMS and email reminders.
+            `
+        },
+        "5": {
+            title: "Lumina Portfolio",
+            image: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&q=80&w=800",
+            tags: ["Minimalist", "Design", "GSAP", "Three.js"],
+            description: `
+                Lumina is an exploration of digital minimalism and interactive storytelling. Designed for a high-end photography agency, the website acts as a blank canvas that emphasizes visual content through subtle motion and precise typography.
+                <br><br>
+                We implemented advanced scroll-triggered animations and lazy-loading strategies to ensure that the heavy visual content never compromises the browsing experience. Every transition was meticulously timed to reflect the agency's premium brand identity.
+                <br><br>
+                The project received an "Honorable Mention" from Awwwards and has significantly increased the agency's lead generation among luxury lifestyle brands.
+            `
+        },
+        "6": {
+            title: "Apex E-learning Platform",
+            image: "https://images.unsplash.com/photo-1501504905252-473c47e087f8?auto=format&fit=crop&q=80&w=800",
+            tags: ["LMS", "E-learning", "Membership", "UX"],
+            description: `
+                Apex is a comprehensive learning management ecosystem built to scale. The project required integrating complex pedagogical structures into a user-friendly interface that keeps students engaged and motivated.
+                <br><br>
+                Key features include adaptive learning paths, gamified progress tracking, and an automated certification engine. We optimized the platform for high-concurrency during live webinar events and implemented a custom membership tier system.
+                <br><br>
+                Today, Apex hosts over 200 professional courses and serves a global community of 250,000+ students, maintaining peak performance even during concurrent traffic spikes.
+            `
+        }
+    };
+
+    const modal = document.getElementById('projectModal');
+    const closeModal = document.getElementById('closeModal');
+    const modalContent = document.getElementById('modalContent');
+    const projectCards = document.querySelectorAll('.project-card');
+
+    function openModal(projectId) {
+        const data = projectsData[projectId];
+        if (!data) return;
+
+        modalContent.innerHTML = `
+            <div class="flex flex-col">
+                <div class="h-[400px] overflow-hidden">
+                    <img src="${data.image}" class="w-full h-full object-cover" alt="${data.title}">
+                </div>
+                <div class="p-8 lg:p-12">
+                    <div class="flex flex-wrap gap-2 mb-6">
+                        ${data.tags.map(tag => `<span class="px-4 py-1.5 bg-primary-fixed text-on-primary-fixed-variant text-xs font-bold uppercase tracking-widest rounded-full">${tag}</span>`).join('')}
+                    </div>
+                    <h2 class="text-4xl lg:text-5xl font-extrabold tracking-tighter mb-8">${data.title}</h2>
+                    <div class="text-on-surface-variant leading-relaxed text-lg space-y-6">
+                        ${data.description}
+                    </div>
+                    <div class="mt-12 flex flex-wrap gap-6 pt-10 border-t border-outline-variant/10">
+                        <a href="#" class="px-8 py-4 bg-primary text-on-primary rounded-xl font-bold tracking-tight hover:bg-primary-container transition-all flex items-center gap-2">
+                            Visit Site
+                            <span class="material-symbols-outlined text-sm">open_in_new</span>
+                        </a>
+                        <a href="#" class="px-8 py-4 border-2 border-primary text-primary rounded-xl font-bold tracking-tight hover:bg-primary/5 transition-all">
+                            Case Study PDF
+                        </a>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        modal.classList.add('active');
+        document.body.classList.add('modal-open');
+    }
+
+    function hideModal() {
+        modal.classList.remove('active');
+        document.body.classList.remove('modal-open');
+    }
+
+    projectCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const id = card.getAttribute('data-project-id');
+            openModal(id);
+        });
+    });
+
+    closeModal.addEventListener('click', hideModal);
+    modal.addEventListener('click', (e) => {
+        if (e.target === modal) hideModal();
+    });
+
+    // Back to top functionality
+    const backToTop = document.getElementById('backToTop');
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 500) {
+            backToTop.style.opacity = '1';
+            backToTop.style.transform = 'translateY(0)';
+        } else {
+            backToTop.style.opacity = '0';
+            backToTop.style.transform = 'translateY(40px)';
+        }
+    });
+    backToTop.addEventListener('click', () => {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+</script>
+</body></html>
